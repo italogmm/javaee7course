@@ -5,6 +5,7 @@
  */
 package br.com.devmedia.consultorioee.service;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -14,14 +15,14 @@ import javax.persistence.Query;
  * @author italo.miranda
  */
 public abstract class BasicRepository {
-    
+
     private final EntityManager entityManager;
-    
-    public BasicRepository(EntityManager  entityManager){
+
+    public BasicRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-    
-    protected EntityManager getEntityManager(){
+
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
 
@@ -43,7 +44,7 @@ public abstract class BasicRepository {
         return qr.executeUpdate();
     }
 
-    private Query createQuery(String query, Object... values) {
+    protected Query createQuery(String query, Object... values) {
 
         Query qr = getEntityManager().createQuery(query);
 
@@ -52,5 +53,27 @@ public abstract class BasicRepository {
         }
 
         return qr;
+    }
+
+    protected <T> T getEntity(Class<T> classToCast, Serializable pk) {
+        return getEntityManager().find(classToCast, pk);
+    }
+
+    protected <T> T setEntity(Class<T> classToCast, Object entity) {
+
+        Object updatedObject = getEntityManager().merge(entity);
+        return (T) updatedObject;
+    }
+
+    protected void removeEntity(Object entity) {
+
+        Object updatedObject = getEntityManager().merge(entity);
+        getEntityManager().remove(updatedObject);
+    }
+
+    protected <T> T addEntity(Class<T> classToCast, Object entity) {
+        
+        getEntityManager().persist(entity);
+        return (T) entity;
     }
 }
