@@ -38,20 +38,47 @@ public class FinanceRepository extends BasicRepository {
         removeEntity(parcela);
     }
 
-    public List<Parcela> getParcelas(int idOrcamento) {
+    public List<Parcela> getParcelasOfOrcamento(int idOrcamento) {
         return getPureList(Parcela.class,
                 "select par from Parcela par where par.parOrcamento.orcId = ?1", idOrcamento);
     }
     
-    public List<Parcela> getParcelasEmAberto(int idOrcamento){
+    public List<Parcela> getParcelasOfOrcamentoEmAberto(int idOrcamento){
         return getPureList(Parcela.class,
                 "select par from Parcela par where par.parOrcamento.orcId = ?1 and par.parPago = ?2",
                 idOrcamento, Boolean.FALSE);
     }
     
-    public List<Parcela> getParcelasPagas(int idOrcamento){
+    public List<Parcela> getParcelasOfOrcamentoPagas(int idOrcamento){
         return getPureList(Parcela.class,
                 "select par from Parcela par where par.parOrcamento.orcId = ?1 and par.parPago = ?2",
                 idOrcamento, Boolean.TRUE);
     }
+    
+    public List<Parcela> getParcelasOfCostumer(int idCostumer) {
+        return getPureList(Parcela.class,
+                "select par from Parcela par where par.parOrcamento.orcCostumer.cusId = ?1", idCostumer);
+    }
+    
+    public List<Parcela> getParcelasOfCostumerEmAberto(int idCostumer) {
+        return getPureList(Parcela.class,
+                "select par from Parcela par where par.parOrcamento.orcCostumer.cusId = ?1 and par.parPago = ?2", idCostumer);
+    }
+    
+    public List<Parcela> getParcelasOfCostumerPagas(int idCostumer){
+        return getPureList(Parcela.class,
+                "select par from Parcela par where par.parOrcamento.orcCostumer.cusId = ?1 and par.parPago = ?2",
+                idCostumer, Boolean.TRUE);
+    }
+    
+    public Parcela setPagamentoParcela(int idOfParcela){
+        
+        Parcela parcela = getParcela(idOfParcela);
+        parcela.setParPago(true);
+        setParcela(parcela);
+        
+        return parcela;
+    }
+    
+    
 }

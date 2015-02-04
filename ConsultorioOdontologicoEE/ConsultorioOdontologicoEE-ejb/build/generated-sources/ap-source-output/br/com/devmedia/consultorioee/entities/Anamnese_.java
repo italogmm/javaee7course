@@ -1,12 +1,12 @@
 package br.com.devmedia.consultorioee.entities;
 
-import br.com.devmedia.consultorioee.entities.Costumer;
+import br.com.devmedia.consultorioee.entities.Customer;
 import br.com.devmedia.consultorioee.entities.Orcamento;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-03T21:48:16")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-03T22:43:01")
 @StaticMetamodel(Anamnese.class)
 public class Anamnese_ { 
 
@@ -20,7 +20,7 @@ public class Anamnese_ {
     public static volatile SingularAttribute<Anamnese, String> ansdescricaoAlergia;
     public static volatile SingularAttribute<Anamnese, String> ansObs;
     public static volatile SingularAttribute<Anamnese, Boolean> ansPraticaExercicio;
-    public static volatile SingularAttribute<Anamnese, Costumer> ansCostumer;
+    public static volatile SingularAttribute<Anamnese, Customer> ansCostumer;
     public static volatile SingularAttribute<Anamnese, Boolean> ansDst;
     public static volatile SingularAttribute<Anamnese, String> ansdescricaoMedicacaoContinua;
     public static volatile SingularAttribute<Anamnese, Boolean> ansoperacaoRecente;

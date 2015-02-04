@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Costumer.findAll", query = "SELECT c FROM Costumer c")})
-public class Costumer implements Serializable {
+public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -112,14 +112,14 @@ public class Costumer implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcCostumer")
     private List<Orcamento> orcamentoList;
 
-    public Costumer() {
+    public Customer() {
     }
 
-    public Costumer(Integer cusId) {
+    public Customer(Integer cusId) {
         this.cusId = cusId;
     }
 
-    public Costumer(Integer cusId, String cusName, int cusAge, String cusState, String cusCity, String cusFather, String cusMother, String cuscellNumber, Date cusbornDate) {
+    public Customer(Integer cusId, String cusName, int cusAge, String cusState, String cusCity, String cusFather, String cusMother, String cuscellNumber, Date cusbornDate) {
         this.cusId = cusId;
         this.cusName = cusName;
         this.cusAge = cusAge;
@@ -295,10 +295,10 @@ public class Costumer implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Costumer)) {
+        if (!(object instanceof Customer)) {
             return false;
         }
-        Costumer other = (Costumer) object;
+        Customer other = (Customer) object;
         if ((this.cusId == null && other.cusId != null) || (this.cusId != null && !this.cusId.equals(other.cusId))) {
             return false;
         }
