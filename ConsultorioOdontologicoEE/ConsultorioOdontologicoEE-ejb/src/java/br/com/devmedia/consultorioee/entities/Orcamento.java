@@ -73,7 +73,7 @@ public class Orcamento implements Serializable {
     private Users orcDentist;
     @JoinColumn(name = "orc_costumer", referencedColumnName = "cus_id", nullable = false)
     @ManyToOne(optional = false)
-    private Customer orcCostumer;
+    private Customer orcCustomer;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oriOrcamento")
     private List<Orcamentoitem> orcamentoitemList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parOrcamento")
@@ -165,12 +165,12 @@ public class Orcamento implements Serializable {
         this.orcDentist = orcDentist;
     }
 
-    public Customer getOrcCostumer() {
-        return orcCostumer;
+    public Customer getOrcCustomer() {
+        return orcCustomer;
     }
 
-    public void setOrcCostumer(Customer orcCostumer) {
-        this.orcCostumer = orcCostumer;
+    public void setOrcCustomer(Customer orcCustomer) {
+        this.orcCustomer = orcCustomer;
     }
 
     @XmlTransient

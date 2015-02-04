@@ -109,7 +109,7 @@ public class Customer implements Serializable {
     private Date cusbornDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansCostumer")
     private List<Anamnese> anamneseList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcCostumer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcCustomer")
     private List<Orcamento> orcamentoList;
 
     public Customer() {
