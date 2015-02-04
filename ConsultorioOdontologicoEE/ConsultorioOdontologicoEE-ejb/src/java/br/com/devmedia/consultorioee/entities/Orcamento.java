@@ -8,6 +8,7 @@ package br.com.devmedia.consultorioee.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -62,12 +63,12 @@ public class Orcamento implements Serializable {
     @Column(name = "orc_total", precision = 16, scale = 2)
     private BigDecimal orcTotal;
     @Size(max = 9)
-    @Column(name = "orc_paymentType", length = 9)
+    @Column(name = "orc_paymentType", length = 9, nullable = false)
     private String orcpaymentType;
     @Column(name = "orc_times")
     private Integer orcTimes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansOrcamento")
-    private List<Anamnese> anamneseList;
+    private List<Anamnese> anamneseList = new LinkedList<Anamnese>();
     @JoinColumn(name = "orc_dentist", referencedColumnName = "usu_id", nullable = false)
     @ManyToOne(optional = false)
     private Users orcDentist;
@@ -75,9 +76,9 @@ public class Orcamento implements Serializable {
     @ManyToOne(optional = false)
     private Customer orcCustomer;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "oriOrcamento")
-    private List<Orcamentoitem> orcamentoitemList;
+    private List<Orcamentoitem> orcamentoitemList = new LinkedList<Orcamentoitem>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parOrcamento")
-    private List<Parcela> parcelaList;
+    private List<Parcela> parcelaList = new LinkedList<Parcela>();
 
     public Orcamento() {
     }
@@ -94,6 +95,11 @@ public class Orcamento implements Serializable {
 
     public Integer getOrcId() {
         return orcId;
+    }
+    
+    public void addItem(Orcamentoitem item){
+        item.setOriOrcamento(this);
+        orcamentoitemList.add(item);
     }
 
     public void setOrcId(Integer orcId) {
