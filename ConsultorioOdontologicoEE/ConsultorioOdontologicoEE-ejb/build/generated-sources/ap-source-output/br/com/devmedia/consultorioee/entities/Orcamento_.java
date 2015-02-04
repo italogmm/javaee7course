@@ -13,7 +13,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-04T13:20:44")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-04T16:59:38")
 @StaticMetamodel(Orcamento.class)
 public class Orcamento_ { 
 

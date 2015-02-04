@@ -17,7 +17,6 @@
 package br.com.devmedia.consultorioee.repositories;
 
 import br.com.devmedia.consultorioee.entities.Users;
-import br.com.devmedia.consultorioee.service.BasicRepository;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -17,7 +17,6 @@
 package br.com.devmedia.consultorioee.repositories;
 
 import br.com.devmedia.consultorioee.entities.Customer;
-import br.com.devmedia.consultorioee.service.BasicRepository;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

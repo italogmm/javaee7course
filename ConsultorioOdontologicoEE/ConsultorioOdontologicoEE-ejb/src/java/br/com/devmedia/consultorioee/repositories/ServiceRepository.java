@@ -17,7 +17,6 @@
 package br.com.devmedia.consultorioee.repositories;
 
 import br.com.devmedia.consultorioee.entities.Service;
-import br.com.devmedia.consultorioee.service.BasicRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 
