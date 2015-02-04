@@ -4,6 +4,7 @@ import br.com.devmedia.consultorioee.entities.Anamnese;
 import br.com.devmedia.consultorioee.entities.Customer;
 import br.com.devmedia.consultorioee.entities.Orcamentoitem;
 import br.com.devmedia.consultorioee.entities.Parcela;
+import br.com.devmedia.consultorioee.entities.PaymentType;
 import br.com.devmedia.consultorioee.entities.Users;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,12 +13,12 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-04T12:54:10")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-04T13:20:44")
 @StaticMetamodel(Orcamento.class)
 public class Orcamento_ { 
 
     public static volatile SingularAttribute<Orcamento, Date> orcHour;
-    public static volatile SingularAttribute<Orcamento, String> orcpaymentType;
+    public static volatile SingularAttribute<Orcamento, PaymentType> orcpaymentType;
     public static volatile ListAttribute<Orcamento, Parcela> parcelaList;
     public static volatile SingularAttribute<Orcamento, Users> orcDentist;
     public static volatile SingularAttribute<Orcamento, Integer> orcTimes;

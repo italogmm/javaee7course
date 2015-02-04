@@ -14,6 +14,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,7 +66,8 @@ public class Orcamento implements Serializable {
     private BigDecimal orcTotal;
     @Size(max = 9)
     @Column(name = "orc_paymentType", length = 9, nullable = false)
-    private String orcpaymentType;
+    @Enumerated(EnumType.STRING)
+    private PaymentType orcpaymentType;
     @Column(name = "orc_times")
     private Integer orcTimes;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansOrcamento")
@@ -100,6 +103,16 @@ public class Orcamento implements Serializable {
     public void addItem(Orcamentoitem item){
         item.setOriOrcamento(this);
         orcamentoitemList.add(item);
+    }
+    
+    public void addAnamnese(Anamnese anamnese){
+        anamnese.setAnsOrcamento(this);
+        anamneseList.add(anamnese);
+    }
+    
+    public void addParcela(Parcela parcela){
+        parcela.setParOrcamento(this);
+        parcelaList.add(parcela);
     }
 
     public void setOrcId(Integer orcId) {
@@ -138,11 +151,11 @@ public class Orcamento implements Serializable {
         this.orcTotal = orcTotal;
     }
 
-    public String getOrcpaymentType() {
+    public PaymentType getOrcpaymentType() {
         return orcpaymentType;
     }
 
-    public void setOrcpaymentType(String orcpaymentType) {
+    public void setOrcpaymentType(PaymentType orcpaymentType) {
         this.orcpaymentType = orcpaymentType;
     }
 

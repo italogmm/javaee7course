@@ -6,14 +6,13 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-04T12:54:10")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2015-02-04T13:20:44")
 @StaticMetamodel(Anamnese.class)
 public class Anamnese_ { 
 
     public static volatile SingularAttribute<Anamnese, String> ansdescricaoDst;
     public static volatile SingularAttribute<Anamnese, Orcamento> ansOrcamento;
     public static volatile SingularAttribute<Anamnese, String> ansdescricaoMedicacaoContinua;
-    public static volatile SingularAttribute<Anamnese, Customer> ansCostumer;
     public static volatile SingularAttribute<Anamnese, Boolean> ansAlergia;
     public static volatile SingularAttribute<Anamnese, Boolean> ansDoenca;
     public static volatile SingularAttribute<Anamnese, Boolean> ansDst;
@@ -24,6 +23,7 @@ public class Anamnese_ {
     public static volatile SingularAttribute<Anamnese, String> ansdescricaoOperacaoRecente;
     public static volatile SingularAttribute<Anamnese, String> ansObs;
     public static volatile SingularAttribute<Anamnese, Integer> ansId;
+    public static volatile SingularAttribute<Anamnese, Customer> ansCustomer;
     public static volatile SingularAttribute<Anamnese, Boolean> ansmedicacaoContinua;
     public static volatile SingularAttribute<Anamnese, Boolean> ansFuma;
 

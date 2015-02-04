@@ -7,6 +7,7 @@ package br.com.devmedia.consultorioee.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -107,10 +108,10 @@ public class Customer implements Serializable {
     @Column(name = "cus_bornDate", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date cusbornDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansCostumer")
-    private List<Anamnese> anamneseList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ansCustomer")
+    private List<Anamnese> anamneseList = new LinkedList<Anamnese>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcCustomer")
-    private List<Orcamento> orcamentoList;
+    private List<Orcamento> orcamentoList = new LinkedList<Orcamento>();
 
     public Customer() {
     }
@@ -131,6 +132,16 @@ public class Customer implements Serializable {
         this.cusbornDate = cusbornDate;
     }
 
+    public void addOrcamento(Orcamento orcamento){
+        orcamento.setOrcCustomer(this);
+        getOrcamentoList().add(orcamento);
+    }
+    
+    public void addAnamnese(Anamnese anam){
+        anam.setAnsCustomer(this);
+        getAnamneseList().add(anam);
+    }
+    
     public Integer getCusId() {
         return cusId;
     }

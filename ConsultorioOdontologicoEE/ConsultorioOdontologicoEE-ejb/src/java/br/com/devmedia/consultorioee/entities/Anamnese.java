@@ -88,7 +88,7 @@ public class Anamnese implements Serializable {
     private Orcamento ansOrcamento;
     @JoinColumn(name = "ans_costumer", referencedColumnName = "cus_id", nullable = false)
     @ManyToOne(optional = false)
-    private Customer ansCostumer;
+    private Customer ansCustomer;
 
     public Anamnese() {
     }
@@ -228,12 +228,12 @@ public class Anamnese implements Serializable {
         this.ansOrcamento = ansOrcamento;
     }
 
-    public Customer getAnsCostumer() {
-        return ansCostumer;
+    public Customer getAnsCustomer() {
+        return ansCustomer;
     }
 
-    public void setAnsCostumer(Customer ansCostumer) {
-        this.ansCostumer = ansCostumer;
+    public void setAnsCustomer(Customer ansCustomer) {
+        this.ansCustomer = ansCustomer;
     }
 
     @Override
