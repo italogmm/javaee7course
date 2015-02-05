@@ -87,11 +87,9 @@ public class UserServiceTest {
     @Test
     public void testGetUser() throws Exception {
         System.out.println("getUser");
-        int id = 0;
         
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
-        
         
         usrOne = instance.addUser(usrOne);
         usrTwo = instance.addUser(usrTwo);

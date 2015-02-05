@@ -16,7 +16,7 @@
  */
 package br.com.devmedia.consultorioee.repositories;
 
-import br.com.devmedia.consultorioee.entities.Customer;
+import br.com.devmedia.consultorioee.entities.Costumer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,31 +34,31 @@ public class CustomerRepository extends BasicRepository {
         super(entityManager);
     }
 
-    public Customer addCostumer(Customer customer) {
-        return addEntity(Customer.class, customer);
+    public Costumer addCostumer(Costumer customer) {
+        return addEntity(Costumer.class, customer);
     }
 
-    public Customer setCostumer(Customer customer) {
-        return setEntity(Customer.class, customer);
+    public Costumer setCostumer(Costumer customer) {
+        return setEntity(Costumer.class, customer);
     }
 
-    public void removeCostumer(Customer customer) {
+    public void removeCostumer(Costumer customer) {
         removeEntity(customer);
     }
 
-    public Customer getCostumer(Customer customer) {
-        return getEntity(Customer.class, customer);
+    public Costumer getCostumer(Costumer customer) {
+        return getEntity(Costumer.class, customer);
     }
 
-    public Customer getCostumer(int idCostumer) {
-        return getEntity(Customer.class, idCostumer);
+    public Costumer getCostumer(int idCostumer) {
+        return getEntity(Costumer.class, idCostumer);
     }
 
-    public List<Customer> getCustomerByName(String name) {
-        return getPureList(Customer.class, "select cus from Customer cus where cus.cusName like ?1", name + "%");
+    public List<Costumer> getCustomerByName(String name) {
+        return getPureList(Costumer.class, "select cus from Customer cus where cus.cusName like ?1", name + "%");
     }
 
-    public List<Customer> getCustomersToCall(int month, int year) {
+    public List<Costumer> getCustomersToCall(int month, int year) {
 
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
@@ -72,12 +72,12 @@ public class CustomerRepository extends BasicRepository {
 
         Date dataFinal = cal.getTime();
 
-        return getPureList(Customer.class, "select orc.orcCustomer from Orcamento orc where orc.orcDate >= ?1 "
+        return getPureList(Costumer.class, "select orc.orcCustomer from Orcamento orc where orc.orcDate >= ?1 "
                 + " and orc.orcDate <= 2", dataInicial, dataFinal);
     }
 
-    public List<Customer> getCustomersComPagamentoEmAberto(int idOfCustomer) {
-        return getPureList(Customer.class, "select par.parOrcamento.orcCustomer from Parcela par where "
+    public List<Costumer> getCustomersComPagamentoEmAberto(int idOfCustomer) {
+        return getPureList(Costumer.class, "select par.parOrcamento.orcCustomer from Parcela par where "
                 + "par.parOrcamento.orcCustomer.cusId = ?1 and par.parPago = ?2 ",
                 idOfCustomer, Boolean.FALSE);
     }
