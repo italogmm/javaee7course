@@ -71,7 +71,7 @@ public class UserRepository extends BasicRepository {
     }
 
     public List<Users> getUsers(){
-        return getPureList(Users.class, "select usr from Users user");
+        return getPureList(Users.class, "select usr from Users usr");
     } 
     
     public List<Users> getUsersByName(String name){
