@@ -32,53 +32,72 @@ import static org.junit.Assert.*;
  * @author italogustavomirandamelo
  */
 public class UserServiceTest {
-    
+
     private Users usrOne;
     private Users usrTwo;
     private Users usrThree;
-    
+
+    private EJBContainer container;
+    private UserService instance;
+
     public UserServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp() {
-        
+    public void setUp() throws Exception {
+
+        container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
+        instance = (UserService) container.getContext().lookup("java:global/classes/UserService");
+
         usrOne = new Users();
         usrOne.setUsuAdministrator(new Random().nextBoolean());
         usrOne.setUsuDentist(new Random().nextBoolean());
         usrOne.setUsuLogin("testLoginOne " + new Random().nextInt());
         usrOne.setUsuName("testNameOne " + new Random().nextInt());
         usrOne.setUsuPassword((usrOne.getUsuLogin()));
-        
+
         usrTwo = new Users();
         usrTwo.setUsuAdministrator(new Random().nextBoolean());
         usrTwo.setUsuDentist(new Random().nextBoolean());
         usrTwo.setUsuLogin("testLoginTwo " + new Random().nextInt());
         usrTwo.setUsuName("testNameTwo " + new Random().nextInt());
         usrTwo.setUsuPassword((usrTwo.getUsuLogin()));
-        
+
         usrThree = new Users();
         usrThree.setUsuAdministrator(new Random().nextBoolean());
         usrThree.setUsuDentist(new Random().nextBoolean());
         usrThree.setUsuLogin("testLoginThree " + new Random().nextInt());
         usrThree.setUsuName("testNameThree " + new Random().nextInt());
         usrThree.setUsuPassword((usrThree.getUsuLogin()));
+        
+        usrOne = instance.addUser(usrOne);
+        usrTwo = instance.addUser(usrTwo);
+        usrThree = instance.addUser(usrThree);
     }
-    
+
     @After
     public void tearDown() {
+
+        instance.removeUser(usrOne);
+        instance.removeUser(usrTwo);
+        instance.removeUser(usrThree);
+        
+        instance = null;
+        
         usrOne = null;
         usrTwo = null;
         usrThree = null;
-        
+
+        container.close();
+        container = null;
     }
 
     /**
@@ -87,41 +106,32 @@ public class UserServiceTest {
     @Test
     public void testGetUser() throws Exception {
         System.out.println("getUser");
-        
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
-        
-        usrOne = instance.addUser(usrOne);
-        usrTwo = instance.addUser(usrTwo);
-        usrThree = instance.addUser(usrThree);
-        
+
         Users expResult = usrTwo;
-        
+
         Users result = instance.getUser(usrTwo.getUsuId());
         assertEquals(expResult, result);
-        
-        instance.removeUser(usrOne);
-        instance.removeUser(usrTwo);
-        instance.removeUser(usrThree);
-        
-        container.close();
+
     }
 
     /**
      * Test of setUser method, of class UserService.
      */
-    //@Test
+    @Test
     public void testSetUser() throws Exception {
         System.out.println("setUser");
-        Users user = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
-        Users expResult = null;
+        
+        Users user = usrThree;
+        Users expResult = usrThree;
+        
+        user.setUsuName("ChangedUserName " + new Random().nextInt());
+        
         Users result = instance.setUser(user);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Users resultFromGet = instance.getUser(user.getUsuId());
+        
+        assertEquals(resultFromGet.getUsuName(), expResult.getUsuName());
+        assertEquals(resultFromGet, result);
+        assertEquals(resultFromGet.getUsuName(), result.getUsuName());
     }
 
     /**
@@ -132,7 +142,7 @@ public class UserServiceTest {
         System.out.println("removeUser");
         Users user = null;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
+        UserService instance = (UserService) container.getContext().lookup("java:global/classes/UserService");
         instance.removeUser(user);
         container.close();
         // TODO review the generated test code and remove the default call to fail.
@@ -142,13 +152,13 @@ public class UserServiceTest {
     /**
      * Test of setPassword method, of class UserService.
      */
-   // @Test
+    // @Test
     public void testSetPassword() throws Exception {
         System.out.println("setPassword");
         int idOfUser = 0;
         String password = "";
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
+        UserService instance = (UserService) container.getContext().lookup("java:global/classes/UserService");
         instance.setPassword(idOfUser, password);
         container.close();
         // TODO review the generated test code and remove the default call to fail.
@@ -163,7 +173,7 @@ public class UserServiceTest {
         System.out.println("addUser");
         Users user = null;
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
+        UserService instance = (UserService) container.getContext().lookup("java:global/classes/UserService");
         Users expResult = null;
         Users result = instance.addUser(user);
         assertEquals(expResult, result);
@@ -181,7 +191,7 @@ public class UserServiceTest {
         String login = "";
         String password = "";
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
+        UserService instance = (UserService) container.getContext().lookup("java:global/classes/UserService");
         Users expResult = null;
         Users result = instance.getUserByLoginPassword(login, password);
         assertEquals(expResult, result);
@@ -197,7 +207,7 @@ public class UserServiceTest {
     public void testGetUsers() throws Exception {
         System.out.println("getUsers");
         EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        UserService instance = (UserService)container.getContext().lookup("java:global/classes/UserService");
+        UserService instance = (UserService) container.getContext().lookup("java:global/classes/UserService");
         List<Users> expResult = null;
         List<Users> result = instance.getUsers();
         assertEquals(expResult, result);
@@ -205,5 +215,5 @@ public class UserServiceTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }
