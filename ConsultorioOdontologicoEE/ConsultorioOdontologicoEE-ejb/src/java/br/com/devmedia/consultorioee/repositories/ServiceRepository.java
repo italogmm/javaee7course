@@ -56,9 +56,9 @@ public class ServiceRepository extends BasicRepository {
 
     public List<Service> getServiceByName(String name) {
 
-        List<Service> users = getPureList(Service.class,
-                "select serv from Service serv where serv.srvName = ?1", name + "%");
+        List<Service> services = getPureList(Service.class,
+                "select serv from Service serv where serv.srvName like ?1", name + "%");
 
-        return users;
+        return services;
     }
 }
