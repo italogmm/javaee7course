@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Costumer.findAll", query = "SELECT c FROM Costumer c")})
-public class Costumer implements Serializable {
+    @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")})
+public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -96,6 +96,9 @@ public class Costumer implements Serializable {
     @Size(max = 255)
     @Column(name = "cus_workAdress", length = 255)
     private String cusworkAdress;
+    @Size(max = 255)
+    @Column(name = "cus_adress", length = 255)
+    private String cusAdress;
     @Lob
     @Size(max = 65535)
     @Column(name = "cus_workObs", length = 65535)
@@ -113,14 +116,14 @@ public class Costumer implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orcCustomer")
     private List<Orcamento> orcamentoList = new LinkedList<Orcamento>();
 
-    public Costumer() {
+    public Customer() {
     }
 
-    public Costumer(Integer cusId) {
+    public Customer(Integer cusId) {
         this.cusId = cusId;
     }
 
-    public Costumer(Integer cusId, String cusName, int cusAge, String cusState, String cusCity, String cusFather, String cusMother, String cuscellNumber, Date cusbornDate) {
+    public Customer(Integer cusId, String cusName, int cusAge, String cusState, String cusCity, String cusFather, String cusMother, String cuscellNumber, Date cusbornDate) {
         this.cusId = cusId;
         this.cusName = cusName;
         this.cusAge = cusAge;
@@ -306,10 +309,10 @@ public class Costumer implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Costumer)) {
+        if (!(object instanceof Customer)) {
             return false;
         }
-        Costumer other = (Costumer) object;
+        Customer other = (Customer) object;
         if ((this.cusId == null && other.cusId != null) || (this.cusId != null && !this.cusId.equals(other.cusId))) {
             return false;
         }
@@ -318,7 +321,21 @@ public class Costumer implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.devmedia.consultorioee.entities.Costumer[ cusId=" + cusId + " ]";
+        return "br.com.devmedia.consultorioee.entities.Customer[ cusId=" + cusId + " ]";
+    }
+
+    /**
+     * @return the cusAdress
+     */
+    public String getCusAdress() {
+        return cusAdress;
+    }
+
+    /**
+     * @param cusAdress the cusAdress to set
+     */
+    public void setCusAdress(String cusAdress) {
+        this.cusAdress = cusAdress;
     }
     
 }
