@@ -17,6 +17,10 @@
 package br.com.devmedia.consultorioee.service;
 
 import br.com.devmedia.consultorioee.entities.Customer;
+import br.com.devmedia.consultorioee.entities.Orcamento;
+import br.com.devmedia.consultorioee.entities.PaymentType;
+import br.com.devmedia.consultorioee.entities.Users;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -33,28 +37,28 @@ import static org.junit.Assert.*;
  * @author italogustavomirandamelo
  */
 public class CustomerServiceTest {
-    
+
     private Customer customerOne;
     private Customer customerTwo;
     private Customer customerThree;
-
+    private Users usrOne;
     private EJBContainer container;
     private CustomerService instance;
-    
+
     public CustomerServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp() throws Exception{
-        
+    public void setUp() throws Exception {
+
         container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
         instance = (CustomerService) container.getContext().lookup("java:global/classes/CustomerService");
 
@@ -66,26 +70,70 @@ public class CustomerServiceTest {
         customerOne.setCusComplement("Complement " + new Random().nextInt());
         customerOne.setCusFather("Father " + new Random().nextInt());
         customerOne.setCusMother("Mother " + new Random().nextInt());
-        customerOne.setCusName("Name One " + new Random().nextInt());
+        customerOne.setCusName("Customer Name one " + new Random().nextInt());
         customerOne.setCusObs("Obs " + new Random().nextInt());
         customerOne.setCusOcupation("Ocupation " + new Random().nextInt());
         customerOne.setCusState("XX " + new Random().nextInt());
         customerOne.setCusTelephone("Tel " + new Random().nextInt());
         customerOne.setCuscellNumber("Cellnumber " + new Random().nextInt());
         customerOne.setCusworkAdress("Work address one " + new Random().nextInt());
-        
-        customerTwo = new Customer();
-        
-        customerThree = new Customer();
+        customerOne.setCusworkName("Work name one " + new Random().nextInt());
+        customerOne.setCusworkNumber("Work number one " + new Random().nextInt());
+        customerOne.setCusworkObs("Work number obs " + new Random().nextInt());
 
+        customerTwo = new Customer();
+        customerTwo.setCusAdress("Address two " + new Random().nextInt());
+        customerTwo.setCusbornDate(new Date());
+        customerTwo.setCusAge(Math.abs(new Random().nextInt(99)));
+        customerTwo.setCusCity("City " + new Random().nextInt());
+        customerTwo.setCusComplement("Complement " + new Random().nextInt());
+        customerTwo.setCusFather("Father " + new Random().nextInt());
+        customerTwo.setCusMother("Mother " + new Random().nextInt());
+        customerTwo.setCusName("Customer Name two " + new Random().nextInt());
+        customerTwo.setCusObs("Obs " + new Random().nextInt());
+        customerTwo.setCusOcupation("Ocupation " + new Random().nextInt());
+        customerTwo.setCusState("XX " + new Random().nextInt());
+        customerTwo.setCusTelephone("Tel " + new Random().nextInt());
+        customerTwo.setCuscellNumber("Cellnumber " + new Random().nextInt());
+        customerTwo.setCusworkAdress("Work address two " + new Random().nextInt());
+        customerTwo.setCusworkName("Work name two " + new Random().nextInt());
+        customerTwo.setCusworkNumber("Work number two " + new Random().nextInt());
+        customerTwo.setCusworkObs("Work number two " + new Random().nextInt());
+
+        customerThree = new Customer();
+        customerThree.setCusAdress("Address three " + new Random().nextInt());
+        customerThree.setCusbornDate(new Date());
+        customerThree.setCusAge(Math.abs(new Random().nextInt(99)));
+        customerThree.setCusCity("City " + new Random().nextInt());
+        customerThree.setCusComplement("Complement " + new Random().nextInt());
+        customerThree.setCusFather("Father " + new Random().nextInt());
+        customerThree.setCusMother("Mother " + new Random().nextInt());
+        customerThree.setCusName("Customer Name three " + new Random().nextInt());
+        customerThree.setCusObs("Obs " + new Random().nextInt());
+        customerThree.setCusOcupation("Ocupation " + new Random().nextInt());
+        customerThree.setCusState("XX " + new Random().nextInt());
+        customerThree.setCusTelephone("Tel " + new Random().nextInt());
+        customerThree.setCuscellNumber("Cellnumber " + new Random().nextInt());
+        customerThree.setCusworkAdress("Work address three " + new Random().nextInt());
+        customerThree.setCusworkName("Work name three " + new Random().nextInt());
+        customerThree.setCusworkNumber("Work number three " + new Random().nextInt());
+        customerThree.setCusworkObs("Work number three " + new Random().nextInt());
+
+        usrOne = new Users();
+        usrOne.setUsuAdministrator(new Random().nextBoolean());
+        usrOne.setUsuDentist(new Random().nextBoolean());
+        usrOne.setUsuLogin("testLoginOne " + new Random().nextInt());
+        usrOne.setUsuName("testNameOne " + new Random().nextInt());
+        usrOne.setUsuPassword((usrOne.getUsuLogin()));
+        
         customerOne = instance.addCustomer(customerOne);
         customerTwo = instance.addCustomer(customerTwo);
         customerThree = instance.addCustomer(customerThree);
     }
-    
+
     @After
     public void tearDown() {
-        
+
         instance.removeCustomer(customerOne);
         instance.removeCustomer(customerTwo);
         instance.removeCustomer(customerThree);
@@ -98,7 +146,7 @@ public class CustomerServiceTest {
 
         container.close();
         container = null;
-        
+
     }
 
     /**
@@ -106,16 +154,34 @@ public class CustomerServiceTest {
      */
     @Test
     public void testAddCustomer() throws Exception {
+        
         System.out.println("addCustomer");
-        Customer customer = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        CustomerService instance = (CustomerService)container.getContext().lookup("java:global/classes/CustomerService");
-        Customer expResult = null;
+
+        Customer customer = new Customer();
+        customer.setCusAdress("Address testeAdd " + new Random().nextInt());
+        customer.setCusbornDate(new Date());
+        customer.setCusAge(Math.abs(new Random().nextInt(99)));
+        customer.setCusCity("City " + new Random().nextInt());
+        customer.setCusComplement("Complement " + new Random().nextInt());
+        customer.setCusFather("Father " + new Random().nextInt());
+        customer.setCusMother("Mother " + new Random().nextInt());
+        customer.setCusName("Name testeAdd " + new Random().nextInt());
+        customer.setCusObs("Obs " + new Random().nextInt());
+        customer.setCusOcupation("Ocupation " + new Random().nextInt());
+        customer.setCusState("XX " + new Random().nextInt());
+        customer.setCusTelephone("Tel " + new Random().nextInt());
+        customer.setCuscellNumber("Cellnumber " + new Random().nextInt());
+        customer.setCusworkAdress("Work address testeAdd " + new Random().nextInt());
+        customer.setCusworkName("Work name testeAdd " + new Random().nextInt());
+        customer.setCusworkNumber("Work number testeAdd " + new Random().nextInt());
+        customer.setCusworkObs("Work number testeAdd " + new Random().nextInt());
+
         Customer result = instance.addCustomer(customer);
+        
+        Customer expResult = instance.getCustomer(result.getCusId());
+        
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult.getCusName(), result.getCusName());
     }
 
     /**
@@ -123,16 +189,15 @@ public class CustomerServiceTest {
      */
     @Test
     public void testSetCustomer() throws Exception {
+        
         System.out.println("setCustomer");
-        Customer customer = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        CustomerService instance = (CustomerService)container.getContext().lookup("java:global/classes/CustomerService");
-        Customer expResult = null;
-        Customer result = instance.setCustomer(customer);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        String newNameOfCustomer = "Customer changed name " + new Random().nextInt();
+        Customer cus = customerTwo;
+        cus.setCusName(newNameOfCustomer);
+        
+        Customer result = instance.setCustomer(cus);
+        assertEquals(newNameOfCustomer, result.getCusName());
     }
 
     /**
@@ -141,13 +206,36 @@ public class CustomerServiceTest {
     @Test
     public void testRemoveCustomer() throws Exception {
         System.out.println("removeCustomer");
-        Customer customer = null;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        CustomerService instance = (CustomerService)container.getContext().lookup("java:global/classes/CustomerService");
-        instance.removeCustomer(customer);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        Customer cus = new Customer();
+        cus.setCusAdress("Address testeRemove " + new Random().nextInt());
+        cus.setCusbornDate(new Date());
+        cus.setCusAge(Math.abs(new Random().nextInt(99)));
+        cus.setCusCity("City " + new Random().nextInt());
+        cus.setCusComplement("Complement " + new Random().nextInt());
+        cus.setCusFather("Father " + new Random().nextInt());
+        cus.setCusMother("Mother " + new Random().nextInt());
+        cus.setCusName("Name testeAdd " + new Random().nextInt());
+        cus.setCusObs("Obs " + new Random().nextInt());
+        cus.setCusOcupation("Ocupation " + new Random().nextInt());
+        cus.setCusState("XX " + new Random().nextInt());
+        cus.setCusTelephone("Tel " + new Random().nextInt());
+        cus.setCuscellNumber("Cellnumber " + new Random().nextInt());
+        cus.setCusworkAdress("Work address testeRemove " + new Random().nextInt());
+        cus.setCusworkName("Work name testeRemove " + new Random().nextInt());
+        cus.setCusworkNumber("Work number testeRemove " + new Random().nextInt());
+        cus.setCusworkObs("Work number testeRemove " + new Random().nextInt());
+
+        Customer toRemove = instance.addCustomer(cus);
+        Customer gettedToRemove = instance.getCustomer(toRemove.getCusId());
+        
+        assertNotNull(toRemove);
+        assertNotNull(gettedToRemove);
+        
+        instance.removeCustomer(gettedToRemove);
+        
+        Customer removed = instance.getCustomer(gettedToRemove.getCusId());
+        assertNull(removed);
     }
 
     /**
@@ -156,15 +244,13 @@ public class CustomerServiceTest {
     @Test
     public void testGetCustomer() throws Exception {
         System.out.println("getCustomer");
-        int idCustomer = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        CustomerService instance = (CustomerService)container.getContext().lookup("java:global/classes/CustomerService");
-        Customer expResult = null;
+
+        int idCustomer = customerThree.getCusId();
+        
+        Customer expResult = customerThree;
         Customer result = instance.getCustomer(idCustomer);
+        
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -173,15 +259,12 @@ public class CustomerServiceTest {
     @Test
     public void testGetCustomerByName() throws Exception {
         System.out.println("getCustomerByName");
-        String name = "";
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        CustomerService instance = (CustomerService)container.getContext().lookup("java:global/classes/CustomerService");
-        List<Customer> expResult = null;
-        List<Customer> result = instance.getCustomerByName(name);
-        assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        assertEquals(3, instance.getCustomerByName("Customer Name"));
+        assertEquals(1, instance.getCustomerByName("Customer Name one"));
+        assertEquals(1, instance.getCustomerByName("Customer Name two"));
+        assertEquals(1, instance.getCustomerByName("Customer Name three"));
+        assertEquals(0, instance.getCustomerByName("ksaakdasdklhjdk" + new Random().nextInt()));
     }
 
     /**
@@ -190,33 +273,36 @@ public class CustomerServiceTest {
     @Test
     public void testGetCustomersToCall() throws Exception {
         System.out.println("getCustomersToCall");
-        int month = 0;
-        int year = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        CustomerService instance = (CustomerService)container.getContext().lookup("java:global/classes/CustomerService");
+
+        int month = new Random().nextInt(13);
+        if(month == 0) month++;
+        
+        int year = 2013;
+        
+        Orcamento orcamento = new Orcamento();
+        orcamento.setOrcCustomer(customerOne);
+        orcamento.setOrcDentist(usrOne);
+        orcamento.setOrcTimes(10);
+        orcamento.setOrcTotal(BigDecimal.TEN);
+        orcamento.setOrcpaymentType(PaymentType.CREDITO);
+        
+        
         List<Customer> expResult = null;
         List<Customer> result = instance.getCustomersToCall(month, year);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getCustomersComPagamentoEmAberto method, of class CustomerService.
+     * Test of getCustomersComPagamentoEmAberto method, of class
+     * CustomerService.
      */
     @Test
     public void testGetCustomersComPagamentoEmAberto() throws Exception {
         System.out.println("getCustomersComPagamentoEmAberto");
+
         int idOfCustomer = 0;
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        CustomerService instance = (CustomerService)container.getContext().lookup("java:global/classes/CustomerService");
         List<Customer> expResult = null;
         List<Customer> result = instance.getCustomersComPagamentoEmAberto(idOfCustomer);
         assertEquals(expResult, result);
-        container.close();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-    
 }
