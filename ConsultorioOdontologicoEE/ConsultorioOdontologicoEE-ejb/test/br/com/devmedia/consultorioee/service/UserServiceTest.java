@@ -171,12 +171,13 @@ public class UserServiceTest {
         System.out.println("setPassword");
         
         String tmpPassword = new Random().nextInt() + "MyChangePassword";
-        String md5TmpPassword = getMD5(tmpPassword);
         
-        instance.setPassword(usrTwo.getUsuId(), md5TmpPassword);
+        instance.setPassword(usrTwo.getUsuId(), tmpPassword);
         
         Users user = instance.getUser(usrTwo.getUsuId());
-        assertEquals(user.getUsuPassword(), md5TmpPassword);
+        
+        tmpPassword = getMD5(tmpPassword);
+        assertEquals(user.getUsuPassword(), tmpPassword);
     }
     
     private String getMD5(final String message) {
@@ -248,6 +249,6 @@ public class UserServiceTest {
         expResult.add(usrThree);
         
         List<Users> result = instance.getUsers();
-        assertTrue(expResult.containsAll(result));
+        assertEquals(expResult, result);
     }
 }
