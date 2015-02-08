@@ -16,6 +16,7 @@
  */
 package br.com.devmedia.consultorioee.repositories;
 
+import br.com.devmedia.consultorioee.service.AnamneseService;
 import br.com.devmedia.consultorioee.entities.Anamnese;
 import br.com.devmedia.consultorioee.entities.Customer;
 import br.com.devmedia.consultorioee.entities.Orcamento;

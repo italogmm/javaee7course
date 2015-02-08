@@ -14,11 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package br.com.devmedia.consultorioee.repositories;
+package br.com.devmedia.consultorioee.service;
 
 import br.com.devmedia.consultorioee.entities.Anamnese;
 import br.com.devmedia.consultorioee.entities.Customer;
 import br.com.devmedia.consultorioee.entities.Orcamento;
+import br.com.devmedia.consultorioee.repositories.AnamneseRepository;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
